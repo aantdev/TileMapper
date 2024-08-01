@@ -1,4 +1,4 @@
-set X 500 ;
+set X 500;
 set Y 40;
 
 
