@@ -30,9 +30,9 @@ char* ftostr(char *path){
     return final;
 }
 
-int check_valid(const char* op, const char** trgt, int limit){
+int check_valid(char* op, char** trgt, int limit){
     int i;
-    for (i = 0; i<2; i++){
+    for (i = 0; i<limit; i++){
         if (strcmp(op, trgt[i]) == 0){ break; }
     }
 
@@ -47,3 +47,29 @@ void check_int(const char* num){
         if (!fl) {printf("Expected int, got %c.\n", num[i]); exit(1);}
     }
 }
+
+void check_sym(const char *sym, int* op, const int op_prev, int* visits){
+    const char symbol = sym[0];
+    if (op_prev == SET_VAL || op_prev == *op) { 
+        if (symbol != ';') {
+            printf("Expecting ';'\n");
+            exit(-1);
+        }
+        
+        *visits = 0;
+        *op = OP_ID;
+        return;
+    }
+    
+    if (op_prev == PUT_VAL){ // PUT or TILE
+        printf("Put operation, vitit: %d.\n", *visits);
+        exit(-1);
+    }
+
+    if (op_prev == TILE){
+        printf("Tile operation, nothing here for now.\n");
+        exit(-1); 
+    }
+
+}
+

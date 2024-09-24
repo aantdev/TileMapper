@@ -1,4 +1,7 @@
 set X 500;
 set Y 40;
 
+//This is a comment
+
+//this is also a comment
 
