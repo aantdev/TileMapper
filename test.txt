@@ -1,7 +1,31 @@
 set X 500;
-set Y 40;
+set Y 500;
 
-//This is a comment
+tile my_tile {
+    texture: "",
+    animated: 0,
+    width: 32,
+    height: 32
+};
 
-//this is also a comment
+// valid field count = 4
+// new int visit field = 0
+// --each field visit will 
+// --remove one field from 
+// --expected fields, reset 
+// --with block end
 
+// with field_visit = 0, we have a tile id. 
+// see if tile id exits, otherwise
+// add to array of tiles.
+// check field validity in ID op
+// if valid visits++
+
+// tile cycle:
+//    0     1     2      3     4      5      6      7     8      9      10
+// op_id -> id -> sym -> id -> sym -> val -> sym -> id -> sym -> val -> sym
+
+put C (40,40,30,20);
+
+// This is a comment
+// this is also a comment

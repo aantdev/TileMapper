@@ -20,6 +20,6 @@ int check_valid(char* op, char** trgt, int limit);
 //check that token is int
 void check_int(const char* num);
 //Check sym.
-void check_sym(const char* sym, int* op, const int op_prev, int* visits);
+void check_sym(const char* sym, int* op, int* op_prev, int* visits, int active_op);
 
 #endif

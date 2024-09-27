@@ -48,28 +48,70 @@ void check_int(const char* num){
     }
 }
 
-void check_sym(const char *sym, int* op, const int op_prev, int* visits){
+void check_sym(const char *sym, int* op, int* op_prev, int* visits, int active_op){
     const char symbol = sym[0];
-    if (op_prev == SET_VAL || op_prev == *op) { 
+    char expected_c;
+    
+    printf("%d::%d::%c\n", *visits, active_op, symbol);
+    if (active_op == SET_VAL || *op_prev == *op) { 
         if (symbol != ';') {
             printf("Expecting ';'\n");
             exit(-1);
         }
-        
+         
+        printf("--done--\n");
         *visits = 0;
         *op = OP_ID;
         return;
     }
     
-    if (op_prev == PUT_VAL){ // PUT or TILE
-        printf("Put operation, vitit: %d.\n", *visits);
+    if (active_op == PUT_VAL){ // PUT
+        if (*visits == 0){
+            if (symbol != '('){
+                printf("Expecting (");
+                exit(-1);
+            }
+
+            *op = PUT_VAL;
+            return;
+        }
+
+        if (*visits == 4){
+            if(symbol != ')') { 
+                printf("Expecting )");
+                exit(-1);
+            }
+            *op = SYM;
+            return;
+        }    
+
+        if (*visits%2 != 0){
+            if (symbol != ',') { 
+                printf("Expecting ,");
+                exit(-1);
+            }
+            *op = PUT_VAL;
+            return;
+        }else {
+            if (symbol == ','){
+                *op = PUT_VAL;
+                return;
+            }
+
+            if (symbol == ')'){
+                printf("Back to sym\n");
+                *op = SYM;
+                return;
+            }
+            
+            printf("Expecting , or ), got: %c", symbol);
+            exit(-1);
+        }
+    }
+
+    if (active_op == TILE){
+        printf("I sense... a tile.\n");
         exit(-1);
     }
-
-    if (op_prev == TILE){
-        printf("Tile operation, nothing here for now.\n");
-        exit(-1); 
-    }
-
 }
 
