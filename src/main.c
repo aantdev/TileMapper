@@ -1,8 +1,10 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
+#define ARENA_IMPLEMENTATION
 #include "../include/utils.h"
+#include "../include/arena.h"
+
+static Arena GLOBL_ARENA = {0}; 
+
+//TODO: Fix error handling.
 
 int valid_opc = 3;
 char* valid_ops[] = {
@@ -23,11 +25,14 @@ char* valid_id_put[] = {
     "P"
 };
 
+char* valid_field[] = {
+    "texture",
+    "animated",
+    "width",
+    "height"
+};
 
-
-// width height info
-int dim_vars[2] = {0, 0};
-
+map_data map_pack;
 void parse(char* str);
 
 int main(int argc, char** argv){
@@ -35,11 +40,11 @@ int main(int argc, char** argv){
         printf("Error: Invalid number of arguments.\nUsage: mapper in.txt\n");
         exit(1);
     }
-    
+
     char* fstring = ftostr(argv[argc-1]); //copy full file to string
     parse(fstring);
         
-    printf("X: %d, Y: %d\n", dim_vars[0], dim_vars[1]);
+    printf("X: %d, Y: %d\n", map_pack.dim_vars[0], map_pack.dim_vars[1]);
 
     free(fstring);
     return 0;
@@ -73,6 +78,7 @@ void parse(char* str){
         c = str[i];
         c_next = str[i+1];
         
+        // skip comment 
         if (c == '/' && c == c_next) {
             while (c!='\n' && c!='\000') {
                 i++;
@@ -84,7 +90,7 @@ void parse(char* str){
         symbol = ( c == ';' ) || ( c == '=' ) || 
                  ( c == ')' ) || ( c == '(' ) || 
                  ( c == '}' ) || ( c == '{' ) ||
-                 ( c == ',' ) ;
+                 ( c == ',' ) || ( c == ':' ) ;
 
         if (!white_or_new && first == SEARCH_RESET) { 
             after_char = 1; 
@@ -99,7 +105,6 @@ void parse(char* str){
             int n_offset = (last-first) ? last-first : (last-first) + 1;
             memcpy(tmp[j], str+first, (last-first)+1);
             tmp[j][n_offset] = '\0';
-            // printf("%s,%d\n", tmp[j], op_id); 
             
             begin_op = op_id; 
             //SYM, or ; is the last search state. Process, and reset
@@ -117,12 +122,10 @@ void parse(char* str){
 
             // Search for the set value. Expect int.
             if (op_id == SET_VAL){
-                
                 check_int(tmp[j]);
-                dim_vars[id_index] = atoi(tmp[j]); 
+                map_pack.dim_vars[id_index] = atoi(tmp[j]); 
 
                 op_id=SYM;
-                visitc++;
             }
             
             //searching for put value.
@@ -130,16 +133,17 @@ void parse(char* str){
                 check_int(tmp[j]);
                 //placeholder, write placement data to struct.
                 op_id=SYM; 
-                printf("Visited\n");
                 visitc++;
             }
             
-            //What the fuck? Fix this.
+            if (op_id == TILE_VAL) {
+                op_id = SYM; //TODO: ACTUALLY CHECK VALIDITY
+            }
+
             // Search for target identifier
             if (op_id == ID) {
                 op_id += fl+1;
                 
-                // printf("::%d::", op_id);
                 switch (op_id) {
                     //Does the id exist? 
                     //Then proceed.
@@ -151,17 +155,13 @@ void parse(char* str){
                     //move to sym if yes.
                     case PUT_VAL:
                         id_index = check_valid(tmp[j], valid_id_put, valid_putc);
-                        
-                        prev_op = fl+2;
                         op_id = SYM; 
-                        //Proceed to SYM.
-                        // Loop from SYM to PUT_VAL
                     break;
                     
                     // Move to sym. 
-                    // From sym, to field check
                     case TILE:
-                        printf("Uhhh\n");
+                        check_valid(tmp[j], valid_field, 4);
+                        visitc++;
                         op_id = SYM;
                     break;
                 }

@@ -33,7 +33,7 @@ char* ftostr(char *path){
 int check_valid(char* op, char** trgt, int limit){
     int i;
     for (i = 0; i<limit; i++){
-        if (strcmp(op, trgt[i]) == 0){ break; }
+        if (strcmp(op, trgt[i]) == 0) break; 
     }
 
     return i;
@@ -50,9 +50,7 @@ void check_int(const char* num){
 
 void check_sym(const char *sym, int* op, int* op_prev, int* visits, int active_op){
     const char symbol = sym[0];
-    char expected_c;
-    
-    printf("%d::%d::%c\n", *visits, active_op, symbol);
+    printf("%d::%d::%d::%c\n", *visits, active_op, *op_prev, symbol);
     if (active_op == SET_VAL || *op_prev == *op) { 
         if (symbol != ';') {
             printf("Expecting ';'\n");
@@ -65,6 +63,7 @@ void check_sym(const char *sym, int* op, int* op_prev, int* visits, int active_o
         return;
     }
     
+    //TODO: Simplify PUT
     if (active_op == PUT_VAL){ // PUT
         if (*visits == 0){
             if (symbol != '('){
@@ -110,8 +109,53 @@ void check_sym(const char *sym, int* op, int* op_prev, int* visits, int active_o
     }
 
     if (active_op == TILE){
-        printf("I sense... a tile.\n");
-        exit(-1);
+        if (*visits == 1 ) {
+            if (symbol == '{') { *op = ID; return;}
+            if (symbol == ':') { *op = TILE_VAL; return;}
+            exit(1); // some invalid symbol
+        }
+
+        if (*visits%2 == 0) {
+            if ( *op_prev == ID ) {
+                if (symbol == ':') { *op = TILE_VAL; return; }
+                if (symbol == ',') { *op = ID; return; }
+
+                printf("Unexpected symbol %c\n", symbol);
+                exit(1);
+            }
+
+            if ( *op_prev == TILE_VAL ) {
+                if (symbol == ',') { *op = ID; return; }
+                printf("Unexpected symbol %c\n", symbol);
+                exit(1);
+            }
+        }
+
+        if (*visits == 3) {
+            if ( *op_prev == ID ) {
+                if (symbol == ':') { *op = TILE_VAL; return; }
+                if (symbol == ',') { *op = ID; return; }
+
+                printf("Unexpected symbol %c\n", symbol);
+                exit(1);
+            }
+
+            if ( *op_prev == TILE_VAL ) {
+                if (symbol == ',') { *op = ID; return; }
+                if (symbol == '}') { *op = SYM; return; } 
+                printf("Unexpected symbol %c\n", symbol);
+                exit(1);
+            }
+        }
+
+        if (*visits == 5 ) {
+            if (*op_prev == ID) {
+                if (symbol == ':') {*op = TILE_VAL; return; } 
+            }
+            if ( symbol == '}' ) {*op = SYM; return;}
+            exit(1);
+        }
+
     }
 }
 

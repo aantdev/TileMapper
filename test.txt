@@ -1,12 +1,24 @@
-set X 500;
-set Y 500;
+set X 500; // width in tiles 
+set Y 200; // height in tiles 
+
+//set tile_size 32; // standard tile size?
 
 tile my_tile {
-    texture: "",
-    animated: 0,
-    width: 32,
-    height: 32
+    texture: "./textures/test.png",
+    animated:  0,
+    width: 32,  // with this as override?
+    height: 64
 };
+
+//tile my_tile0 {
+//   texture: "./textures/test0.png",
+//    animated: 0
+//};
+
+//put my_tile (40,40,60,60);
+//put my_tile (40,40);
+
+//put my_tile0 (45,40);
 
 // valid field count = 4
 // new int visit field = 0
@@ -21,11 +33,13 @@ tile my_tile {
 // check field validity in ID op
 // if valid visits++
 
-// tile cycle:
-//    0     1     2      3     4      5      6      7     8      9      10
-// op_id -> id -> sym -> id -> sym -> val -> sym -> id -> sym -> val -> sym
+// minimum tile cycle:
+//    0     1     2      3     4      5      6      7     8      9      10     11 
+// op_id -> id -> sym -> id -> sym -> val -> sym -> id -> sym -> val -> sym -> sym
+//                       v:1                        v:2        
 
-put C (40,40,30,20);
+// sym -> id/val
+// how to distinguish?
 
 // This is a comment
 // this is also a comment
