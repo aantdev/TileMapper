@@ -1,0 +1,8 @@
+tile my_tile {
+    texture: "mypath",
+    animated: 0,
+    width: 32,
+    height: 64
+}
+
+

@@ -4,11 +4,11 @@ set Y 200; // height in tiles
 //set tile_size 32; // standard tile size?
 
 tile my_tile {
-    texture: "./textures/test.png",
-    animated:  0,
+    texture: "./textures/test.png", 
+    animated:  0, 
     width: 32,  // with this as override?
-    height: 64
-};
+    height: 64 // another comment
+}
 
 //tile my_tile0 {
 //   texture: "./textures/test0.png",

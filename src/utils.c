@@ -1,4 +1,5 @@
 #include "../include/utils.h"
+#define ARENA_IMPLEMENTATION
 
 char* ftostr(char *path){
     //try to open file
@@ -8,7 +9,6 @@ char* ftostr(char *path){
         fclose(fptr);
         exit(1);
     }
-    
     
     //allocate space, write contents to space.
     char c;
@@ -28,6 +28,37 @@ char* ftostr(char *path){
 
     fclose(fptr);
     return final;
+}
+
+FILE* gen_csv_zero(map_data* map_struct){ 
+    int width = 100;
+    int height = 100;
+
+    FILE* csv = fopen("LEVEL_CSV_BLANK.txt", "w");
+
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            fprintf(csv, "0,"); // print col 0
+        }
+        
+        fprintf(csv, "\n"); // print newline, advance to next y
+    } 
+
+    return csv;
+}
+
+void init_map(map_data* map){
+    map->tile_count = 5;
+    map->pos_count = 10;
+    
+    map->tiles = arena_alloc(&GLOBL_ARENA, map->tile_count * sizeof(tile));
+    map->positions = arena_alloc(&GLOBL_ARENA, map->pos_count*sizeof(pos));
+
+}
+
+void alter_csv(map_data* map_pack){
+    
+    fclose(map_pack->csv);
 }
 
 int check_valid(char* op, char** trgt, int limit){

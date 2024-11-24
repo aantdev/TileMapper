@@ -1,8 +1,5 @@
 #define ARENA_IMPLEMENTATION
 #include "../include/utils.h"
-#include "../include/arena.h"
-
-static Arena GLOBL_ARENA = {0}; 
 
 //TODO: Fix error handling.
 
@@ -13,10 +10,11 @@ char* valid_ops[] = {
     "tile"
 };  
 
-int valid_idc = 2;
+int valid_idc = 3;
 char* valid_id[] = {
     "X",
-    "Y" 
+    "Y",
+    "TS"
 };
 
 int valid_putc = 2; 
@@ -25,6 +23,8 @@ char* valid_id_put[] = {
     "P"
 };
 
+int valid_fieldc = 4;
+int found_fields[] = {0,0,0,0};
 char* valid_field[] = {
     "texture",
     "animated",
@@ -41,12 +41,19 @@ int main(int argc, char** argv){
         exit(1);
     }
 
+    init_map(&map_pack);
+
+    //allocate some room for the tiles
     char* fstring = ftostr(argv[argc-1]); //copy full file to string
     parse(fstring);
-        
-    printf("X: %d, Y: %d\n", map_pack.dim_vars[0], map_pack.dim_vars[1]);
+    
+    
+    printf("X: %d, Y: %d, TS: %d\n", 
+            map_pack.dim_vars[0], map_pack.dim_vars[1], map_pack.dim_vars[TS]);
+    
 
     free(fstring);
+    arena_free(&GLOBL_ARENA);
     return 0;
 }
 
@@ -137,6 +144,21 @@ void parse(char* str){
             }
             
             if (op_id == TILE_VAL) {
+                switch (id_index) {
+                    case 0:
+                        
+                    break;
+                    case 1:
+
+                    break;
+                    case 2:
+
+                    break;
+                    case 3:
+
+                    break;
+                }
+
                 op_id = SYM; //TODO: ACTUALLY CHECK VALIDITY
             }
 
@@ -144,29 +166,38 @@ void parse(char* str){
             if (op_id == ID) {
                 op_id += fl+1;
                 
+                int count_max;
                 switch (op_id) {
                     //Does the id exist? 
                     //Then proceed.
                     case SET_VAL:
                         id_index = check_valid(tmp[j], valid_id, valid_idc);                        
+                        count_max = valid_idc;
                     break;
                     
                     //check if identifier exists.
                     //move to sym if yes.
                     case PUT_VAL:
                         id_index = check_valid(tmp[j], valid_id_put, valid_putc);
-                        op_id = SYM; 
+                        op_id = SYM;
+                        count_max = valid_putc;
                     break;
                     
                     // Move to sym. 
                     case TILE:
-                        check_valid(tmp[j], valid_field, 4);
+                        if (visitc == 0) {
+                            visitc++;
+                            op_id = SYM;
+                            break;
+                        }
+                        id_index = check_valid(tmp[j], valid_field, valid_fieldc);
                         visitc++;
                         op_id = SYM;
+                        count_max = valid_fieldc;
                     break;
                 }
-                if (id_index==valid_idc) { 
-                    printf("Invalid identifier '%s'.\n", tmp[j]); 
+                if (id_index==count_max) { 
+                    printf("Invalid identifier '%s,%d'.\n", tmp[j],id_index); 
                     exit(1); 
                 }
 
@@ -179,6 +210,11 @@ void parse(char* str){
                     printf("OP_ID: Invalid identifier '%s'.", tmp[j]); 
                     exit(1);
                 }
+                
+                if (op_id == TILE_VAL) {
+                    //make_tile(&map_pack)
+                }
+
                 active_op = fl+2;
                 printf("Active: %d\n", active_op);
 
