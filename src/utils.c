@@ -86,7 +86,7 @@ int check_valid(char* op, char** trgt, int limit){
 void check_int(const char* num){
     size_t i;
     for(i = 0; i < strlen(num); i++){
-        if (!(num[i] == '0' && num[i] <= '9')) {
+        if (!(num[i] >= '0' && num[i] <= '9')) {
             printf("Expected int, got %c.\n", num[i]); 
             exit(1);
         }

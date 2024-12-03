@@ -49,6 +49,7 @@ int main(int argc, char** argv){
     printf("X: %d, Y: %d, TS: %d\n", 
             map_pack.dim_vars[0], map_pack.dim_vars[1], map_pack.dim_vars[TS]);
     
+    printf("Number of Tiles: %d\n", map_pack.tile_count);
 
     free(fstring);
     arena_free(&GLOBL_ARENA);
