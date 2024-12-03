@@ -48,12 +48,22 @@ FILE* gen_csv_zero(map_data* map_struct){
 }
 
 void init_map(map_data* map){
-    map->tile_count = 5;
-    map->pos_count = 10;
-    
-    map->tiles = arena_alloc(&GLOBL_ARENA, map->tile_count * sizeof(tile));
-    map->positions = arena_alloc(&GLOBL_ARENA, map->pos_count*sizeof(pos));
+    map->max_tiles = 5;
+    map->max_pos = 25;
 
+    map->tile_count = 1;
+    map->pos_count = 1;
+     
+    map->tiles = arena_alloc(&GLOBL_ARENA, map->max_tiles * sizeof(tile));
+    map->positions = arena_alloc(&GLOBL_ARENA, map->max_pos * sizeof(pos));
+}
+
+void add_tile(map_data *map, tile new_tile) {
+    map->tiles[map->tile_count-1] = new_tile;
+    map->tile_count++;
+
+    if (map->tile_count > map->max_tiles) 
+        map->max_tiles += 5;
 }
 
 void alter_csv(map_data* map_pack){
@@ -66,16 +76,20 @@ int check_valid(char* op, char** trgt, int limit){
     for (i = 0; i<limit; i++){
         if (strcmp(op, trgt[i]) == 0) break; 
     }
-
+    
+    if (i == limit){
+        i = -1;
+    }
     return i;
 }
 
 void check_int(const char* num){
-    int i;
-    int fl;
+    size_t i;
     for(i = 0; i < strlen(num); i++){
-        fl = isNum(num[i]);
-        if (!fl) {printf("Expected int, got %c.\n", num[i]); exit(1);}
+        if (!(num[i] == '0' && num[i] <= '9')) {
+            printf("Expected int, got %c.\n", num[i]); 
+            exit(1);
+        }
     }
 }
 

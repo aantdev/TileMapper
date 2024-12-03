@@ -16,9 +16,6 @@ enum dim_vars  {X = 0, Y = 1, TS = 2};
 
 enum op_status {OP_ID = 0, ID, SET_VAL, PUT_VAL, TILE, SYM, TILE_VAL};
 
-#define isNum(arg)(arg>='0' && arg<='9')
-#define isSym(arg)(strcmp(arg, ";"))
-
 static Arena GLOBL_ARENA = {0}; 
 
 typedef struct {
@@ -29,6 +26,7 @@ typedef struct {
     int height;
     
     // info only in json
+    char name[256];
     int id;
 }tile;
 
@@ -43,6 +41,9 @@ typedef struct {
     int dim_vars[DIM_COUNT];
     FILE* csv;
     
+    int max_tiles;
+    int max_pos; 
+    
     int tile_count;
     int pos_count;
     
@@ -53,11 +54,11 @@ typedef struct {
 char* ftostr(char *path); //take txt file, turn to char*
 
 void init_map(map_data* map);
-void make_tile(map_data* map);
+void add_tile(map_data* map, tile new_tile);
 
 int check_valid(char* op, char** trgt, int limit); //check that token is valid
 void check_int(const char* num); //check that token is int
-void check_sym(const char* sym, int* op, int* op_prev, int* visits, int active_op); //Check sym.
+void check_sym(const char* sym, int* op, int* op_prev, int* visits, int active_op); //Check symbol
 
 FILE* gen_csv_zero(map_data* map_struct); 
 
