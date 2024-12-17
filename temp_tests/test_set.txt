@@ -1,4 +1,1 @@
-set X 400;
-set Y 500;
-
-set TS 32;
+set X 15;set Y 15;set TS 32;

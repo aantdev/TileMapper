@@ -31,13 +31,10 @@ char* ftostr(char *path){
 }
 
 FILE* gen_csv_zero(map_data* map_struct){ 
-    int width = 100;
-    int height = 100;
-
     FILE* csv = fopen("LEVEL_CSV_BLANK.txt", "w");
 
-    for (int i = 0; i < height; i++) {
-        for (int j = 0; j < width; j++) {
+    for (int i = 0; i < map_struct->dim_vars[1]; i++) {
+        for (int j = 0; j < map_struct->dim_vars[0]; j++) {
             fprintf(csv, "0,"); // print col 0
         }
         
@@ -51,15 +48,15 @@ void init_map(map_data* map){
     map->max_tiles = 5;
     map->max_pos = 25;
 
-    map->tile_count = 1;
-    map->pos_count = 1;
+    map->tile_count = 0;
+    map->pos_count = 0;
      
     map->tiles = arena_alloc(&GLOBL_ARENA, map->max_tiles * sizeof(tile));
     map->positions = arena_alloc(&GLOBL_ARENA, map->max_pos * sizeof(pos));
 }
 
 void add_tile(map_data *map, tile new_tile) {
-    map->tiles[map->tile_count-1] = new_tile;
+    map->tiles[map->tile_count - 1] = new_tile;
     map->tile_count++;
 
     if (map->tile_count > map->max_tiles) 
@@ -74,7 +71,8 @@ void alter_csv(map_data* map_pack){
 int check_valid(char* op, char** trgt, int limit){
     int i;
     for (i = 0; i<limit; i++){
-        if (strcmp(op, trgt[i]) == 0) break; 
+        if (strcmp(op, trgt[i]) == 0) 
+            break; 
     }
     
     if (i == limit){

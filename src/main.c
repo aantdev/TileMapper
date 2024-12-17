@@ -45,7 +45,8 @@ int main(int argc, char** argv){
     char* fstring = ftostr(argv[argc-1]); //copy full file to string
     parse(fstring);
     
-    
+    gen_csv_zero(&map_pack);
+
     printf("X: %d, Y: %d, TS: %d\n", 
             map_pack.dim_vars[0], map_pack.dim_vars[1], map_pack.dim_vars[TS]);
     
@@ -67,7 +68,6 @@ void parse(char* str){
     int first = SEARCH_RESET;
     int last = SEARCH_RESET;
     
-    int fl = -1;
     int after_char = 0;
     
     int id_index;
@@ -158,21 +158,20 @@ void parse(char* str){
 
             // Search for target identifier
             if (op_id == ID) {
-                op_id += fl+1;
-                
-                switch (op_id) {
+                switch (active_op) {
                     //Does the id exist? 
                     //Then proceed.
                     case SET_VAL:
                         id_index = check_valid(tmp, valid_id, valid_idc);                        
-                    break;
+                        op_id = SET_VAL;
+                        break;
                     
                     //check if identifier exists.
                     //move to sym if yes.
                     case PUT_VAL:
                         id_index = check_valid(tmp, valid_id_put, valid_putc);
                         op_id = SYM;
-                    break;
+                        break;
                     
                     // Move to sym. 
                     case TILE:
@@ -181,13 +180,14 @@ void parse(char* str){
                             visitc++;
                             op_id = SYM;
                             // add tile name to valid_put 
+                            // add_tile(map_pack, tile new_tile);
 
                             break;
                         }
                         id_index = check_valid(tmp, valid_field, valid_fieldc);
                         visitc++;
                         op_id = SYM;
-                    break;
+                        break;
                 }
                 if (id_index == -1) { 
                     printf("Invalid identifier '%s,%d'.\n", tmp,id_index); 
@@ -198,13 +198,12 @@ void parse(char* str){
 
             //search for operation identifier
             if (op_id == OP_ID) {
-                fl = check_valid(tmp, valid_ops, valid_opc); 
-                if( fl == valid_opc) { 
+                if( check_valid(tmp, valid_ops, valid_opc) == -1) { 
                     printf("OP_ID: Invalid identifier '%s'.", tmp); 
                     exit(1);
                 }
                 
-                active_op = fl+2;
+                active_op = check_valid(tmp, valid_ops, valid_opc) + 2;
                 printf("Active: %d\n", active_op);
 
                 op_id = ID; 

@@ -3,6 +3,4 @@ tile my_tile {
     animated: 0,
     width: 32,
     height: 64
-}
-
-
+};

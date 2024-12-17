@@ -13,9 +13,7 @@
 
 #define DIM_COUNT 3
 enum dim_vars  {X = 0, Y = 1, TS = 2};
-
 enum op_status {OP_ID = 0, ID, SET_VAL, PUT_VAL, TILE, SYM, TILE_VAL};
-
 static Arena GLOBL_ARENA = {0}; 
 
 typedef struct {
