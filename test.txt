@@ -1,0 +1,6 @@
+tile my_tile{
+    path: "Hello",
+    animated: 0,
+    width = 32,
+    height = 32
+};
