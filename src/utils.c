@@ -51,7 +51,8 @@ char* ftostr(char *path){
 
 void error_handle(lexer* lex) {
     if (lex->flag == UNSUPORTED_CHAR) {
-        fprintf(stderr, "Unsuported character, at line, col %d::%d\n", lex->line, lex->column);
+        fprintf(stderr, "%s:%d::%d:Syntax Error: Unsupported character\n", 
+                lex->src_path, lex->line+1, lex->column+1);
         close_lexer(lex);
         exit(EXIT_FAILURE);
     }
@@ -75,9 +76,10 @@ void error_handle(lexer* lex) {
         return;
     }
     
-    if (lex->flag == STRING_LITERAL_EOF) {
+    if (lex->flag == INVALID_STRING_LITERAL) {
+        fprintf(stderr, "%s:%d::%d:Syntax Error: Invalid string literal\n", 
+                lex->src_path, lex->line+1, lex->column+1);
         close_lexer(lex);
-        fprintf(stderr, "Invalid string literal, at line, col %d::%d\n", lex->line, lex->column);
         exit(EXIT_FAILURE);
     }
 }

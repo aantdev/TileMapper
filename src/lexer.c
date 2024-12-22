@@ -7,6 +7,7 @@
 #include "utils.h"
 
 void init_lexer(lexer* lexer, char* path) {
+    lexer->src_path = path;
     lexer->src = ftostr(path);
     lexer->current = 0;
     lexer->line = 0;

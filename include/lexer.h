@@ -9,7 +9,6 @@ typedef enum {
     INIT_FAILURE,
     ADD_TOKEN_FAILURE,
     UNSUPORTED_CHAR,
-    STRING_LITERAL_EOF,
     INVALID_STRING_LITERAL
 } err_code;
 
@@ -31,6 +30,7 @@ typedef struct {
 } token;
 
 typedef struct {
+    char* src_path;
     char* src;
     int length;
     int current;

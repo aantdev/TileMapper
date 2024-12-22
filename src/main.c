@@ -16,6 +16,7 @@ int main(int argc, char** argv) {
     error_handle(&lex);
 
     tokenize(&lex);
+    error_handle(&lex);
     for (int i = 0; i < lex.token_count; i++) {
         printf("Token %s at %d::%d of type %d\n", 
                 lex.tokens[i].literal,
@@ -23,7 +24,6 @@ int main(int argc, char** argv) {
                 lex.tokens[i].column,
                 lex.tokens[i].type);
     }
-    error_handle(&lex);
 
     return 0;
 }

@@ -27,8 +27,9 @@ typedef struct {
 typedef struct {
     // lexer data(tokens)
     // Tokens terminated with EOF Token
-    lexer* lex;
-    
+    token* tokens;
+    int token_count;
+
     // read state and active operation
     read_state rstate;
     active_op active_op;
@@ -40,11 +41,9 @@ typedef struct {
     char* set_array[3];
     int dim_vars[3];
     int dim_count;
-
-    char* tile_fields[4];
 } parser;
 
-void init_parser(parser* parser);
+void init_parser(parser* parser, lexer* lex);
 void parse(parser* parser);
 
 void resolve_set(char* identifier);
