@@ -1,13 +1,20 @@
 # specify compiler, compiler flags
 CC = gcc
-CFLAGS = -std=c99 -Wall -Wextra -ggdb3 -I./include 
+
 
 # specify location of source code
-SRC = ./src
+SRC_ = ./src
+
+
+INC_DIRS = $(dir $(shell find . -name "*.h"))
+INCLUDES = $(addprefix -I,$(INC_DIRS))
 
 # specify .c files, .o files
-CFILES = $(wildcard $(SRC)/*.c)
+CFILES = $(shell find . -name "*.c")
 OBJECTS = $(CFILES:.c=.o)
+
+# flags for compilation
+CFLAGS = -std=c99 -Wall -Wextra -ggdb3 $(INCLUDES)
 
 # specify executable name
 BINARY = lex

@@ -7,12 +7,12 @@
 
 char* temp[] = {"Keyword", "Number", "Symbol", "EOF"};
 int main(int argc, char** argv) {
+    lexer lex = {0};
     if (argc != 2) {
         fprintf(stderr, "Usage:\n./lex <input.txt>\n");
         exit(EXIT_FAILURE);
     }
     
-    lexer lex = {0};
     init_lexer(&lex, argv[argc-1]);
     error_handle(&lex);
 

@@ -6,15 +6,17 @@
       "-Wall",
       "-Wextra",
       "-ggdb3",
-      "-I./include",
+      "-I./src/parser/",
+      "-I./src/utils/",
+      "-I./src/lexer/",
       "-c",
       "-o",
-      "src/lexer.o",
-      "src/lexer.c"
+      "src/parser/parser_src/init_parser.o",
+      "src/parser/parser_src/init_parser.c"
     ],
-    "directory": "/home/Thunkpad/Documents/code/C/Projects/Lexer",
-    "file": "/home/Thunkpad/Documents/code/C/Projects/Lexer/src/lexer.c",
-    "output": "/home/Thunkpad/Documents/code/C/Projects/Lexer/src/lexer.o"
+    "directory": "/home/Thunkpad/Documents/code/C/Projects/TileMapper",
+    "file": "/home/Thunkpad/Documents/code/C/Projects/TileMapper/src/parser/parser_src/init_parser.c",
+    "output": "/home/Thunkpad/Documents/code/C/Projects/TileMapper/src/parser/parser_src/init_parser.o"
   },
   {
     "arguments": [
@@ -23,48 +25,130 @@
       "-Wall",
       "-Wextra",
       "-ggdb3",
-      "-I./include",
+      "-I./src/parser/",
+      "-I./src/utils/",
+      "-I./src/lexer/",
+      "-c",
+      "-o",
+      "src/parser/parser_src/parse.o",
+      "src/parser/parser_src/parse.c"
+    ],
+    "directory": "/home/Thunkpad/Documents/code/C/Projects/TileMapper",
+    "file": "/home/Thunkpad/Documents/code/C/Projects/TileMapper/src/parser/parser_src/parse.c",
+    "output": "/home/Thunkpad/Documents/code/C/Projects/TileMapper/src/parser/parser_src/parse.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-std=c99",
+      "-Wall",
+      "-Wextra",
+      "-ggdb3",
+      "-I./src/parser/",
+      "-I./src/utils/",
+      "-I./src/lexer/",
+      "-c",
+      "-o",
+      "src/utils/utils_src/utils.o",
+      "src/utils/utils_src/utils.c"
+    ],
+    "directory": "/home/Thunkpad/Documents/code/C/Projects/TileMapper",
+    "file": "/home/Thunkpad/Documents/code/C/Projects/TileMapper/src/utils/utils_src/utils.c",
+    "output": "/home/Thunkpad/Documents/code/C/Projects/TileMapper/src/utils/utils_src/utils.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-std=c99",
+      "-Wall",
+      "-Wextra",
+      "-ggdb3",
+      "-I./src/parser/",
+      "-I./src/utils/",
+      "-I./src/lexer/",
+      "-c",
+      "-o",
+      "src/lexer/lexer_src/init_lexer.o",
+      "src/lexer/lexer_src/init_lexer.c"
+    ],
+    "directory": "/home/Thunkpad/Documents/code/C/Projects/TileMapper",
+    "file": "/home/Thunkpad/Documents/code/C/Projects/TileMapper/src/lexer/lexer_src/init_lexer.c",
+    "output": "/home/Thunkpad/Documents/code/C/Projects/TileMapper/src/lexer/lexer_src/init_lexer.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-std=c99",
+      "-Wall",
+      "-Wextra",
+      "-ggdb3",
+      "-I./src/parser/",
+      "-I./src/utils/",
+      "-I./src/lexer/",
+      "-c",
+      "-o",
+      "src/lexer/lexer_src/tokenize.o",
+      "src/lexer/lexer_src/tokenize.c"
+    ],
+    "directory": "/home/Thunkpad/Documents/code/C/Projects/TileMapper",
+    "file": "/home/Thunkpad/Documents/code/C/Projects/TileMapper/src/lexer/lexer_src/tokenize.c",
+    "output": "/home/Thunkpad/Documents/code/C/Projects/TileMapper/src/lexer/lexer_src/tokenize.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-std=c99",
+      "-Wall",
+      "-Wextra",
+      "-ggdb3",
+      "-I./src/parser/",
+      "-I./src/utils/",
+      "-I./src/lexer/",
+      "-c",
+      "-o",
+      "src/lexer/lexer_src/close_lexer.o",
+      "src/lexer/lexer_src/close_lexer.c"
+    ],
+    "directory": "/home/Thunkpad/Documents/code/C/Projects/TileMapper",
+    "file": "/home/Thunkpad/Documents/code/C/Projects/TileMapper/src/lexer/lexer_src/close_lexer.c",
+    "output": "/home/Thunkpad/Documents/code/C/Projects/TileMapper/src/lexer/lexer_src/close_lexer.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-std=c99",
+      "-Wall",
+      "-Wextra",
+      "-ggdb3",
+      "-I./src/parser/",
+      "-I./src/utils/",
+      "-I./src/lexer/",
+      "-c",
+      "-o",
+      "src/lexer/lexer_src/add_token.o",
+      "src/lexer/lexer_src/add_token.c"
+    ],
+    "directory": "/home/Thunkpad/Documents/code/C/Projects/TileMapper",
+    "file": "/home/Thunkpad/Documents/code/C/Projects/TileMapper/src/lexer/lexer_src/add_token.c",
+    "output": "/home/Thunkpad/Documents/code/C/Projects/TileMapper/src/lexer/lexer_src/add_token.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-std=c99",
+      "-Wall",
+      "-Wextra",
+      "-ggdb3",
+      "-I./src/parser/",
+      "-I./src/utils/",
+      "-I./src/lexer/",
       "-c",
       "-o",
       "src/main.o",
       "src/main.c"
     ],
-    "directory": "/home/Thunkpad/Documents/code/C/Projects/Lexer",
-    "file": "/home/Thunkpad/Documents/code/C/Projects/Lexer/src/main.c",
-    "output": "/home/Thunkpad/Documents/code/C/Projects/Lexer/src/main.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/gcc",
-      "-std=c99",
-      "-Wall",
-      "-Wextra",
-      "-ggdb3",
-      "-I./include",
-      "-c",
-      "-o",
-      "src/parcer.o",
-      "src/parcer.c"
-    ],
-    "directory": "/home/Thunkpad/Documents/code/C/Projects/Lexer",
-    "file": "/home/Thunkpad/Documents/code/C/Projects/Lexer/src/parcer.c",
-    "output": "/home/Thunkpad/Documents/code/C/Projects/Lexer/src/parcer.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/gcc",
-      "-std=c99",
-      "-Wall",
-      "-Wextra",
-      "-ggdb3",
-      "-I./include",
-      "-c",
-      "-o",
-      "src/utils.o",
-      "src/utils.c"
-    ],
-    "directory": "/home/Thunkpad/Documents/code/C/Projects/Lexer",
-    "file": "/home/Thunkpad/Documents/code/C/Projects/Lexer/src/utils.c",
-    "output": "/home/Thunkpad/Documents/code/C/Projects/Lexer/src/utils.o"
+    "directory": "/home/Thunkpad/Documents/code/C/Projects/TileMapper",
+    "file": "/home/Thunkpad/Documents/code/C/Projects/TileMapper/src/main.c",
+    "output": "/home/Thunkpad/Documents/code/C/Projects/TileMapper/src/main.o"
   }
 ]

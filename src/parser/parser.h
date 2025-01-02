@@ -55,8 +55,8 @@ typedef struct {
 void init_parser(parser* parser, lexer* lex);
 void parse(parser* parser);
 
-void resolve_set(parser* parser, token token_current);
-void resolve_put(parser* parser, token token_current);
-void resolve_tile(parser* parser, token token_current);
+void process_set(parser* parser, token token_current);
+// void resolve_put(parser* parser, token token_current);
+// void resolve_tile(parser* parser, token token_current);
 
 #endif
