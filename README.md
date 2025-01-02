@@ -5,5 +5,7 @@
 <par> set [X,Y or TS] [valid int] </par>
 
 <h2> To compile and run:</h2>
-<par> Run: `make`, then `make run` or do `./lex [one txt here]` </par>
+<par> 
+Run: <code>make</code>, then <code> make run </code> or do <code>./lex [one txt here]</code>
+</par>
 
