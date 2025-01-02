@@ -1,6 +1,8 @@
-tile my_tile{
-    path: "Tes",
-    animated: 0,
-    width = 32,
-    height = 32
-};
+set X 400; 
+
+//tile my_tile{
+//    path: "Tes",
+//    animated: 0,
+//    width = 32,
+//    height = 32
+//};

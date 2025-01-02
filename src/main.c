@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 #include "lexer.h"
+#include "parser.h"
 #include "utils.h"
 
 char* temp[] = {"Keyword", "Number", "Symbol", "EOF"};
@@ -24,6 +25,10 @@ int main(int argc, char** argv) {
                 lex.tokens[i].column,
                 lex.tokens[i].type);
     }
+
+    parser parser = {0};
+    init_parser(&parser, &lex);
+    parse(&parser);
 
     return 0;
 }

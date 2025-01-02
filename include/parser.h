@@ -14,8 +14,15 @@ typedef enum {
 typedef enum {
     SET,
     PUT,
-    TILE
+    TILE,
+    NONE
 } active_op;
+
+typedef enum {
+    X,
+    Y,
+    TS
+} dim_enum;
 
 typedef struct {
     char* identifier;
@@ -29,6 +36,8 @@ typedef struct {
     // Tokens terminated with EOF Token
     token* tokens;
     int token_count;
+    int token_current;
+    char* file_path;
 
     // read state and active operation
     read_state rstate;
@@ -46,8 +55,8 @@ typedef struct {
 void init_parser(parser* parser, lexer* lex);
 void parse(parser* parser);
 
-void resolve_set(char* identifier);
+void resolve_set(parser* parser, token token_current);
+void resolve_put(parser* parser, token token_current);
+void resolve_tile(parser* parser, token token_current);
 
-void check_tile_overlap(char* identifier);
-void check_tile_exists(char* identifier);
 #endif
