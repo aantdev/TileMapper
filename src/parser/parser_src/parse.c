@@ -4,7 +4,7 @@
 
 #include "parser.h"
 
-//TODO: SYNTAX CHECK
+//TODO: SYNTAX CHECK (done for SET)
 //TODO: PROCESS TILE
 //TODO: PROCESS PUT
 void parse(parser *parser) {
@@ -15,10 +15,10 @@ void parse(parser *parser) {
         "tile"
     };
 
-    int set_variable;
-
     while (parser->tokens[parser->token_current].type != TOKEN_EOF) {
         token token_current = parser->tokens[parser->token_current]; 
+
+        // first step, expecting valid operator
         if (parser->rstate == OPERATOR) {
             //find operator in accepted operators
             int i;
@@ -37,52 +37,26 @@ void parse(parser *parser) {
             
             parser->rstate = IDENTIFIER;
             parser->token_current++;
+
+            // change cycle
             continue;
         }
-
-        if (parser->active_op == SET && parser->rstate == IDENTIFIER) { 
-            if (token_current.type != TOKEN_IDENTIFIER){
+        
+        // process operation
+        switch (parser->active_op) {
+            case SET:
+                process_set(parser, -1); 
+                break;
+            case PUT:
+                // process_put(parser);
+                break;
+            case TILE:
+                // process_tile(parser);
+                break;
+            case NONE:
                 exit(EXIT_FAILURE);
-            }
-
-            for (int i = 0; i < parser->dim_count; i++) {
-                if (strcmp(token_current.literal, parser->set_array[i]) == 0) {
-                    set_variable = i;
-                    break;
-                }
-            }
-
-            parser->rstate = NUMBER;
-            parser->token_current++;
-            continue;
-        } 
-
-        if (parser->active_op == SET && parser->rstate == NUMBER) {
-            if (token_current.type != TOKEN_NUMBER) {
-                exit(EXIT_FAILURE);
-            }
-
-            int temp_int;
-            if (!sscanf(token_current.literal, "%d", &temp_int))
-                exit(EXIT_FAILURE);
-
-            parser->dim_vars[set_variable] = temp_int;       
-
-            parser->rstate = SYMBOL;
-            parser->token_current++;
-            continue;
         }
 
-        if (parser->active_op == SET && parser->rstate == SYMBOL) {
-            if (token_current.type != TOKEN_SYMBOL || token_current.literal[0] != ';') {
-                exit(EXIT_FAILURE);
-            }
-
-            parser->rstate = OPERATOR;
-            parser->token_current++;
-            parser->active_op = NONE;
-        }
 
     }
-    exit(EXIT_SUCCESS);
 }

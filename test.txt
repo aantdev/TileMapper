@@ -1,4 +1,6 @@
 set X 400; 
+set Y 200;
+set TS 32;
 
 //tile my_tile{
 //    path: "Tes",

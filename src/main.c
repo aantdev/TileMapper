@@ -29,6 +29,10 @@ int main(int argc, char** argv) {
     parser parser = {0};
     init_parser(&parser, &lex);
     parse(&parser);
+    
+    printf("\nX = %d\n", parser.dim_vars[0]);
+    printf("Y = %d\n", parser.dim_vars[1]);
+    printf("Tile_size = %d\n", parser.dim_vars[2]);
 
     return 0;
 }
