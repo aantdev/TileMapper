@@ -22,6 +22,11 @@ void init_parser(parser *parser, lexer *lex) {
     parser->set_array[0] = "X";
     parser->set_array[1] = "Y";
     parser->set_array[2] = "TS";
+
+    // parser->accepted_fields[0] = "texture_path";
+    // parser->accepted_fields[1] = "animated";
+    // parser->accepted_fields[2] = "width";
+    // parser->accepted_fields[3] = "height";
     
     parser->tile_count = 0;
     parser->max_tiles = MAX_TILES;

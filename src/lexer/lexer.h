@@ -16,10 +16,15 @@ typedef enum {
     TOKEN_OPERATOR,
     TOKEN_IDENTIFIER,
     TOKEN_STRING_LITERAL,
-    TOKEN_PATH,
     TOKEN_NUMBER,
-    TOKEN_SYMBOL,
-    TOKEN_EOF
+    TOKEN_EOF,
+    TOKEN_RBRACKET_LEFT  = '(',
+    TOKEN_RBRACKET_RIGHT = ')',
+    TOKEN_BRACKET_LEFT   = '{',
+    TOKEN_BRACKET_RIGHT  = '}',
+    TOKEN_SEMICOLON      = ';',
+    TOKEN_COLON          = ':', 
+    TOKEN_COMMA          = ',',
 } t_type;
 
 typedef struct {

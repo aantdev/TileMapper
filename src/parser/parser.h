@@ -7,8 +7,16 @@
 typedef enum {
     OPERATOR,
     IDENTIFIER,
+    FIELD,
     NUMBER,
-    SYMBOL    
+    SYMBOL,
+    SYMBOL_SEMICOLON,
+    SYMBOL_COLON,
+    SYMBOL_COMMA,
+    SYMBOL_LBRACKET,
+    SYMBOL_RBRACKET,
+    SYMBOL_LRBRACKET,
+    SYMBOL_RRBRACKET
 } read_state;
 
 typedef enum {
@@ -26,9 +34,12 @@ typedef enum {
 
 typedef struct {
     char* identifier;
+    int id;
+
     char* texture;
     int animated;
-    int id;
+    int width;
+    int height;
 } tile;
 
 typedef struct {
@@ -46,6 +57,7 @@ typedef struct {
     tile* tiles;
     int max_tiles;
     int tile_count;
+    char* accepted_fields[4];
 
     char* set_array[3];
     int dim_vars[3];

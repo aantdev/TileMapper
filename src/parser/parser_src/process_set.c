@@ -41,15 +41,15 @@ void process_set(parser *parser, int set_var){
 
         parser->dim_vars[set_var] = temp_int;       
 
-        parser->rstate = SYMBOL;
+        parser->rstate = SYMBOL_SEMICOLON;
         parser->token_current++;
         process_set(parser, set_var);
 
         return;
     }
 
-    if (parser->rstate == SYMBOL) {
-        if (token_current.type != TOKEN_SYMBOL || token_current.literal[0] != ';') {
+    if (parser->rstate == SYMBOL_SEMICOLON) {
+        if (token_current.type != TOKEN_SEMICOLON) {
             exit(EXIT_FAILURE);
         }
 

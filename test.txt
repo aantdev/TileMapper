@@ -3,8 +3,10 @@ set Y 200;
 set TS 32;
 
 //tile my_tile{
-//    path: "Tes",
+//    texture: "Tes",
 //    animated: 0,
-//    width = 32,
-//    height = 32
+//    width = 16,
+//    height = 16
 //};
+
+//put my_tile(x0,y0,x1,y1);

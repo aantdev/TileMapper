@@ -19,10 +19,12 @@ void tokenize(lexer* lex) {
         int newline = (c == '\n');
         int d_quote = (c == '"');
         int extra_char = (c == '_');
-        const int symbol = ( c == ';' ) || ( c == '=' ) || 
+        const int symbol = ( c == ';' ) ||  
                            ( c == ')' ) || ( c == '(' ) || 
                            ( c == '}' ) || ( c == '{' ) ||
                            ( c == ',' ) || ( c == ':' ) ;
+        
+
         const int comment = (c == '/') && (c_n == '/');
         // Newline or whitespace, skip
         if (whitespace) {
@@ -53,7 +55,9 @@ void tokenize(lexer* lex) {
             // exactly two chars. [0] = 'char', [1] = '\0'
             int length = 2;
             int start = lex->current;
-            add_token(lex, start, length, TOKEN_SYMBOL);
+            t_type type = c;
+
+            add_token(lex, start, length, type);
 
             lex->current++;
             lex->column++;
