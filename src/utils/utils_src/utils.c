@@ -5,45 +5,30 @@
 char* ftostr(char *path){
     //try to open file
     FILE* fptr;
-    if ((fptr = fopen(path, "r")) == NULL){
+    if ((fptr = fopen(path, "rb")) == NULL){
         perror("Error: ");
         return NULL;
     }
-    
-    //allocate space, write contents to space.
-    char c;
-    size_t max = LEN_STD;
-    size_t count = 0;
-    char* final = malloc(sizeof(char) * max);
-    if (final == NULL){
-        fclose(fptr);
-        free(final);
-        return NULL;
+    char* final = NULL;
+
+    // allocate space, write contents to space
+    if (fseek(fptr, 0, SEEK_END) != 0) {
+        exit(EXIT_FAILURE);
     }
-    while ((c=fgetc(fptr)) != EOF) {
-        if (count >= max){
-            max *= 2;
-            final = realloc(final, max);
-            if (final == NULL){
-                fclose(fptr);
-                free(final);
-                return NULL;
-            }
-        }
-        final[count] = (char) c;
-        count++;
+    long len = ftell(fptr);
+    if (len == -1) {
+        exit(EXIT_FAILURE);
     }
-    
-    //final realloc.
-    final = realloc(final, count + 1);
-    if (final == NULL){
-        fclose(fptr);
-        free(final);
-        return NULL;
+    rewind(fptr);
+    final = malloc(sizeof(char) * len+1);
+
+    size_t shit_read = fread(final, sizeof(char), len, fptr);
+    if (shit_read != (size_t)len) {
+        printf("Shit hit the fan\n");
+        exit(EXIT_FAILURE);
     }
-    
-    if (count > 0)
-        final[count] = '\0';
+
+    final[len] = '\0';
 
     fclose(fptr);
     return final;

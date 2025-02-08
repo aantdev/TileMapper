@@ -16,7 +16,7 @@ void tokenize(lexer* lex) {
         
         // TODO:tokenize string literal
         const int whitespace = (c == ' ');
-        int newline = (c == '\n');
+        int newline = (c == '\n' | c == '\r');
         int d_quote = (c == '"');
         int extra_char = (c == '_');
         const int symbol = ( c == ';' ) ||  
