@@ -44,9 +44,6 @@ typedef struct {
     int line;
     int column;
     
-    int token_limit;
-    int token_count;
-    token* tokens;
     vector_t* token_v;
     
     err_code flag;
