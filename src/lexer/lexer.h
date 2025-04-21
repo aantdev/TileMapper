@@ -1,8 +1,6 @@
 #ifndef LEXER_H 
 #define LEXER_H
 
-#define MAX_TOKENS 128
-
 #include "vector.h"
 
 typedef enum {

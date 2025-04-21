@@ -14,16 +14,17 @@ void parse(parser *parser) {
         "put",
         "tile"
     };
+    
 
-    while (parser->tokens[parser->token_current].type != TOKEN_EOF) {
-        token token_current = parser->tokens[parser->token_current]; 
+    while ( ((token*)at(parser->token_v, parser->token_current))->type != TOKEN_EOF) {
+        token* token_current = at(parser->token_v, parser->token_current); 
 
         // first step, expecting valid operator
         if (parser->rstate == OPERATOR) {
             //find operator in accepted operators
             int i;
             for (i = 0; i < operator_count; i++) {
-                if (strcmp(token_current.literal, operators[i]) == 0) {
+                if (strcmp(token_current->literal, operators[i]) == 0) {
                     // 0 = SET, 1 = PUT, 2 = TILE
                     parser->active_op = i;
                     break;
@@ -31,7 +32,7 @@ void parse(parser *parser) {
             }
 
             if (i == 3) {
-                printf("Expected valid operator! %s\n", token_current.literal);
+                printf("Expected valid operator! %s\n", token_current->literal);
                 exit(EXIT_FAILURE); 
             }
             

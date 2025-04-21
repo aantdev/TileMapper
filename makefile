@@ -6,11 +6,11 @@ CC = gcc
 SRC_ = ./src
 
 
-INC_DIRS = $(dir $(shell find . -name "*.h"))
+INC_DIRS = $(dir $(shell find ./src -name "*.h"))
 INCLUDES = $(addprefix -I,$(INC_DIRS))
 
 # specify .c files, .o files
-CFILES = $(shell find . -name "*.c")
+CFILES = $(shell find ./src -name "*.c")
 OBJECTS = $(CFILES:.c=.o)
 
 # flags for compilation

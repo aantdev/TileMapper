@@ -45,8 +45,7 @@ typedef struct {
 typedef struct {
     // lexer data(tokens)
     // Tokens terminated with EOF Token
-    token* tokens;
-    int token_count;
+    vector_t* token_v;
     int token_current;
     char* file_path;
 
@@ -54,9 +53,7 @@ typedef struct {
     read_state rstate;
     active_op active_op;
     
-    tile* tiles;
-    int max_tiles;
-    int tile_count;
+    vector_t* tile_v;
     char* accepted_fields[4];
 
     char* set_array[3];

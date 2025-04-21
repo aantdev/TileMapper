@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define VECTOR_IMPLEMENTATION
 #include "lexer.h"
 #include "parser.h"
 #include "utils.h"

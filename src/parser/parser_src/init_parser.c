@@ -5,8 +5,8 @@
 #include "parser.h"
 
 void init_parser(parser *parser, lexer *lex) {
-    parser->tokens = lex->tokens;
-    parser->token_count = lex->token_count;
+    parser->token_v = lex->token_v;
+
     parser->token_current = 0;
     parser->file_path = lex->src_path;
     
@@ -27,12 +27,9 @@ void init_parser(parser *parser, lexer *lex) {
     // parser->accepted_fields[1] = "animated";
     // parser->accepted_fields[2] = "width";
     // parser->accepted_fields[3] = "height";
-    
-    parser->tile_count = 0;
-    parser->max_tiles = MAX_TILES;
-    parser->tiles = malloc(MAX_TILES * sizeof(tile));
-    if (parser->tiles == NULL) {
-        printf("Parser init failed\n");
-        exit(EXIT_FAILURE);
+
+    parser->tile_v = init_vector();
+    if (parser->tile_v == NULL) {
+        fprintf(stderr, "Could not init internal tile vector!\n");
     }
 }
