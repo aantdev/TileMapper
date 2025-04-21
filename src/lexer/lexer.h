@@ -3,6 +3,8 @@
 
 #define MAX_TOKENS 128
 
+#include "vector.h"
+
 typedef enum {
     SUCCESS_RUNNING,
     SUCCESS_DONE,
@@ -45,6 +47,7 @@ typedef struct {
     int token_limit;
     int token_count;
     token* tokens;
+    vector_t* token_v;
     
     err_code flag;
 } lexer;

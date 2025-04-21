@@ -25,7 +25,15 @@ void init_lexer(lexer* lexer, char* path) {
     // if all is ok, then alloc some tokens
     lexer->tokens = malloc(sizeof(token) * MAX_TOKENS);
     if (lexer->tokens == NULL) {
-        fprintf(stderr, "Failed to allocate tokens!\n");
+        fprintf(stderr, "Failed to allocate memory for tokens!\n");
+        lexer->flag = INIT_FAILURE;
+        return;
+    }
+    
+    // init internal token vector
+    lexer->token_v = init_vector();
+    if (lexer->token_v == NULL) {
+        fprintf(stderr, "Failed to init internal token Vector!\n");
         lexer->flag = INIT_FAILURE;
         return;
     }
