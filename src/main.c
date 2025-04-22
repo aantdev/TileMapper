@@ -4,7 +4,7 @@
 #define VECTOR_IMPLEMENTATION
 #include "lexer.h"
 #include "parser.h"
-#include "utils.h"
+#include "error.h"
 
 char* temp[] = {"Keyword", "Number", "Symbol", "EOF"};
 int main(int argc, char** argv) {

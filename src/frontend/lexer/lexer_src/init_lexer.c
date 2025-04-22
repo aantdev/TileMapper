@@ -2,11 +2,12 @@
 #include <stdio.h>
 
 #include "lexer.h"
-#include "utils.h"
+#include "file_string.h"
 
 void init_lexer(lexer* lexer, char* path) {
+    
     lexer->src_path = path;
-    lexer->src = ftostr(path);
+    lexer->src = file_read(path);
     lexer->current = 0;
     lexer->line = 0;
     lexer->column = 0;
