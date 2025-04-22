@@ -6,17 +6,18 @@
       "-Wall",
       "-Wextra",
       "-ggdb3",
-      "-I./src/parser/",
-      "-I./src/utils/",
-      "-I./src/lexer/",
+      "-I./src/frontend/lexer/",
+      "-I./src/frontend/parser/",
+      "-I./src/frontend/utils/",
+      "-I./src/common/",
       "-c",
       "-o",
-      "src/parser/parser_src/init_parser.o",
-      "src/parser/parser_src/init_parser.c"
+      "src/frontend/lexer/lexer_src/init_lexer.o",
+      "src/frontend/lexer/lexer_src/init_lexer.c"
     ],
-    "directory": "/home/Thunkpad/Documents/code/C/Projects/TileMapper",
-    "file": "/home/Thunkpad/Documents/code/C/Projects/TileMapper/src/parser/parser_src/init_parser.c",
-    "output": "/home/Thunkpad/Documents/code/C/Projects/TileMapper/src/parser/parser_src/init_parser.o"
+    "directory": "/home/antoine/Documents/code/C/TileMapper",
+    "file": "/home/antoine/Documents/code/C/TileMapper/src/frontend/lexer/lexer_src/init_lexer.c",
+    "output": "/home/antoine/Documents/code/C/TileMapper/src/frontend/lexer/lexer_src/init_lexer.o"
   },
   {
     "arguments": [
@@ -25,17 +26,18 @@
       "-Wall",
       "-Wextra",
       "-ggdb3",
-      "-I./src/parser/",
-      "-I./src/utils/",
-      "-I./src/lexer/",
+      "-I./src/frontend/lexer/",
+      "-I./src/frontend/parser/",
+      "-I./src/frontend/utils/",
+      "-I./src/common/",
       "-c",
       "-o",
-      "src/parser/parser_src/parse.o",
-      "src/parser/parser_src/parse.c"
+      "src/frontend/lexer/lexer_src/add_token.o",
+      "src/frontend/lexer/lexer_src/add_token.c"
     ],
-    "directory": "/home/Thunkpad/Documents/code/C/Projects/TileMapper",
-    "file": "/home/Thunkpad/Documents/code/C/Projects/TileMapper/src/parser/parser_src/parse.c",
-    "output": "/home/Thunkpad/Documents/code/C/Projects/TileMapper/src/parser/parser_src/parse.o"
+    "directory": "/home/antoine/Documents/code/C/TileMapper",
+    "file": "/home/antoine/Documents/code/C/TileMapper/src/frontend/lexer/lexer_src/add_token.c",
+    "output": "/home/antoine/Documents/code/C/TileMapper/src/frontend/lexer/lexer_src/add_token.o"
   },
   {
     "arguments": [
@@ -44,17 +46,18 @@
       "-Wall",
       "-Wextra",
       "-ggdb3",
-      "-I./src/parser/",
-      "-I./src/utils/",
-      "-I./src/lexer/",
+      "-I./src/frontend/lexer/",
+      "-I./src/frontend/parser/",
+      "-I./src/frontend/utils/",
+      "-I./src/common/",
       "-c",
       "-o",
-      "src/utils/utils_src/utils.o",
-      "src/utils/utils_src/utils.c"
+      "src/frontend/lexer/lexer_src/close_lexer.o",
+      "src/frontend/lexer/lexer_src/close_lexer.c"
     ],
-    "directory": "/home/Thunkpad/Documents/code/C/Projects/TileMapper",
-    "file": "/home/Thunkpad/Documents/code/C/Projects/TileMapper/src/utils/utils_src/utils.c",
-    "output": "/home/Thunkpad/Documents/code/C/Projects/TileMapper/src/utils/utils_src/utils.o"
+    "directory": "/home/antoine/Documents/code/C/TileMapper",
+    "file": "/home/antoine/Documents/code/C/TileMapper/src/frontend/lexer/lexer_src/close_lexer.c",
+    "output": "/home/antoine/Documents/code/C/TileMapper/src/frontend/lexer/lexer_src/close_lexer.o"
   },
   {
     "arguments": [
@@ -63,17 +66,18 @@
       "-Wall",
       "-Wextra",
       "-ggdb3",
-      "-I./src/parser/",
-      "-I./src/utils/",
-      "-I./src/lexer/",
+      "-I./src/frontend/lexer/",
+      "-I./src/frontend/parser/",
+      "-I./src/frontend/utils/",
+      "-I./src/common/",
       "-c",
       "-o",
-      "src/lexer/lexer_src/init_lexer.o",
-      "src/lexer/lexer_src/init_lexer.c"
+      "src/frontend/lexer/lexer_src/tokenize.o",
+      "src/frontend/lexer/lexer_src/tokenize.c"
     ],
-    "directory": "/home/Thunkpad/Documents/code/C/Projects/TileMapper",
-    "file": "/home/Thunkpad/Documents/code/C/Projects/TileMapper/src/lexer/lexer_src/init_lexer.c",
-    "output": "/home/Thunkpad/Documents/code/C/Projects/TileMapper/src/lexer/lexer_src/init_lexer.o"
+    "directory": "/home/antoine/Documents/code/C/TileMapper",
+    "file": "/home/antoine/Documents/code/C/TileMapper/src/frontend/lexer/lexer_src/tokenize.c",
+    "output": "/home/antoine/Documents/code/C/TileMapper/src/frontend/lexer/lexer_src/tokenize.o"
   },
   {
     "arguments": [
@@ -82,17 +86,18 @@
       "-Wall",
       "-Wextra",
       "-ggdb3",
-      "-I./src/parser/",
-      "-I./src/utils/",
-      "-I./src/lexer/",
+      "-I./src/frontend/lexer/",
+      "-I./src/frontend/parser/",
+      "-I./src/frontend/utils/",
+      "-I./src/common/",
       "-c",
       "-o",
-      "src/lexer/lexer_src/tokenize.o",
-      "src/lexer/lexer_src/tokenize.c"
+      "src/frontend/parser/parser_src/process_tile.o",
+      "src/frontend/parser/parser_src/process_tile.c"
     ],
-    "directory": "/home/Thunkpad/Documents/code/C/Projects/TileMapper",
-    "file": "/home/Thunkpad/Documents/code/C/Projects/TileMapper/src/lexer/lexer_src/tokenize.c",
-    "output": "/home/Thunkpad/Documents/code/C/Projects/TileMapper/src/lexer/lexer_src/tokenize.o"
+    "directory": "/home/antoine/Documents/code/C/TileMapper",
+    "file": "/home/antoine/Documents/code/C/TileMapper/src/frontend/parser/parser_src/process_tile.c",
+    "output": "/home/antoine/Documents/code/C/TileMapper/src/frontend/parser/parser_src/process_tile.o"
   },
   {
     "arguments": [
@@ -101,17 +106,18 @@
       "-Wall",
       "-Wextra",
       "-ggdb3",
-      "-I./src/parser/",
-      "-I./src/utils/",
-      "-I./src/lexer/",
+      "-I./src/frontend/lexer/",
+      "-I./src/frontend/parser/",
+      "-I./src/frontend/utils/",
+      "-I./src/common/",
       "-c",
       "-o",
-      "src/lexer/lexer_src/close_lexer.o",
-      "src/lexer/lexer_src/close_lexer.c"
+      "src/frontend/parser/parser_src/init_parser.o",
+      "src/frontend/parser/parser_src/init_parser.c"
     ],
-    "directory": "/home/Thunkpad/Documents/code/C/Projects/TileMapper",
-    "file": "/home/Thunkpad/Documents/code/C/Projects/TileMapper/src/lexer/lexer_src/close_lexer.c",
-    "output": "/home/Thunkpad/Documents/code/C/Projects/TileMapper/src/lexer/lexer_src/close_lexer.o"
+    "directory": "/home/antoine/Documents/code/C/TileMapper",
+    "file": "/home/antoine/Documents/code/C/TileMapper/src/frontend/parser/parser_src/init_parser.c",
+    "output": "/home/antoine/Documents/code/C/TileMapper/src/frontend/parser/parser_src/init_parser.o"
   },
   {
     "arguments": [
@@ -120,17 +126,18 @@
       "-Wall",
       "-Wextra",
       "-ggdb3",
-      "-I./src/parser/",
-      "-I./src/utils/",
-      "-I./src/lexer/",
+      "-I./src/frontend/lexer/",
+      "-I./src/frontend/parser/",
+      "-I./src/frontend/utils/",
+      "-I./src/common/",
       "-c",
       "-o",
-      "src/lexer/lexer_src/add_token.o",
-      "src/lexer/lexer_src/add_token.c"
+      "src/frontend/parser/parser_src/process_set.o",
+      "src/frontend/parser/parser_src/process_set.c"
     ],
-    "directory": "/home/Thunkpad/Documents/code/C/Projects/TileMapper",
-    "file": "/home/Thunkpad/Documents/code/C/Projects/TileMapper/src/lexer/lexer_src/add_token.c",
-    "output": "/home/Thunkpad/Documents/code/C/Projects/TileMapper/src/lexer/lexer_src/add_token.o"
+    "directory": "/home/antoine/Documents/code/C/TileMapper",
+    "file": "/home/antoine/Documents/code/C/TileMapper/src/frontend/parser/parser_src/process_set.c",
+    "output": "/home/antoine/Documents/code/C/TileMapper/src/frontend/parser/parser_src/process_set.o"
   },
   {
     "arguments": [
@@ -139,16 +146,57 @@
       "-Wall",
       "-Wextra",
       "-ggdb3",
-      "-I./src/parser/",
-      "-I./src/utils/",
-      "-I./src/lexer/",
+      "-I./src/frontend/lexer/",
+      "-I./src/frontend/parser/",
+      "-I./src/frontend/utils/",
+      "-I./src/common/",
+      "-c",
+      "-o",
+      "src/frontend/parser/parser_src/parse.o",
+      "src/frontend/parser/parser_src/parse.c"
+    ],
+    "directory": "/home/antoine/Documents/code/C/TileMapper",
+    "file": "/home/antoine/Documents/code/C/TileMapper/src/frontend/parser/parser_src/parse.c",
+    "output": "/home/antoine/Documents/code/C/TileMapper/src/frontend/parser/parser_src/parse.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-std=c99",
+      "-Wall",
+      "-Wextra",
+      "-ggdb3",
+      "-I./src/frontend/lexer/",
+      "-I./src/frontend/parser/",
+      "-I./src/frontend/utils/",
+      "-I./src/common/",
+      "-c",
+      "-o",
+      "src/frontend/utils/utils_src/utils.o",
+      "src/frontend/utils/utils_src/utils.c"
+    ],
+    "directory": "/home/antoine/Documents/code/C/TileMapper",
+    "file": "/home/antoine/Documents/code/C/TileMapper/src/frontend/utils/utils_src/utils.c",
+    "output": "/home/antoine/Documents/code/C/TileMapper/src/frontend/utils/utils_src/utils.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-std=c99",
+      "-Wall",
+      "-Wextra",
+      "-ggdb3",
+      "-I./src/frontend/lexer/",
+      "-I./src/frontend/parser/",
+      "-I./src/frontend/utils/",
+      "-I./src/common/",
       "-c",
       "-o",
       "src/main.o",
       "src/main.c"
     ],
-    "directory": "/home/Thunkpad/Documents/code/C/Projects/TileMapper",
-    "file": "/home/Thunkpad/Documents/code/C/Projects/TileMapper/src/main.c",
-    "output": "/home/Thunkpad/Documents/code/C/Projects/TileMapper/src/main.o"
+    "directory": "/home/antoine/Documents/code/C/TileMapper",
+    "file": "/home/antoine/Documents/code/C/TileMapper/src/main.c",
+    "output": "/home/antoine/Documents/code/C/TileMapper/src/main.o"
   }
 ]
