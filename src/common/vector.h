@@ -76,10 +76,6 @@ inline vector_t* init_vector() {
     v->data_array = NULL;
 
     v->data_array = malloc(sizeof(void*) * v->elements);
-    if (v->data_array == NULL) {
-        fprintf(stderr, "Reallocation failed\n");
-        exit(EXIT_FAILURE);
-    }
 
     return v;
 }

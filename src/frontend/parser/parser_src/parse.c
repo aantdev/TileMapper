@@ -1,7 +1,9 @@
+#include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 
+#include "error.h"
 #include "parser.h"
 
 //TODO: SYNTAX CHECK (done for SET)
@@ -32,8 +34,13 @@ void parse(parser *parser) {
             }
 
             if (i == 3) {
-                printf("Expected valid operator! %s\n", token_current->literal);
-                exit(EXIT_FAILURE); 
+                error_t descriptor = {
+                    .line = token_current->line, 
+                    .col = token_current->column,
+                    .message = "Expected a valid operator",
+                    .file_path = parser->file_path,
+                };
+                error_submit(descriptor, false);
             }
             
             parser->rstate = IDENTIFIER;

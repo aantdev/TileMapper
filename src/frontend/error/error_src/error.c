@@ -1,38 +1,46 @@
 #include "error.h"
+#include "lexer.h"
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-void error_handle(lexer* lex) {
-    if (lex->flag == UNSUPORTED_CHAR) {
-        fprintf(stderr, "%s:%d::%d:Syntax Error: Unsupported character\n", 
-                lex->src_path, lex->line+1, lex->column+1);
-        close_lexer(lex);
-        exit(EXIT_FAILURE);
-    }
+static struct error_manager{
+    bool fatal_state;
+    vector_t* error_v;
+    
+} error_m = {.fatal_state = false};
 
-    if (lex->flag == INIT_FAILURE) {
-        fprintf(stderr, "Could not init Lexer!\n");
-        close_lexer(lex);
-        exit(EXIT_FAILURE);
-    }
+void error_if(void* ptr) {
+	if(ptr == NULL) {
+		perror(NULL);
+		exit(EXIT_FAILURE);
+	}
+}
 
-    if (lex->flag == ADD_TOKEN_FAILURE) {
-        fprintf(stderr, "Could not add token!\n");
-        close_lexer(lex);
+void error_init(void) {
+    error_m.error_v = init_vector();
+    error_if(error_m.error_v);
+}
 
-        exit(EXIT_FAILURE);
-    }
+void error_submit(error_t error, bool fatal) {
+    push_back(error_m.error_v, &error, sizeof(error));
+    if (fatal)
+        error_final();
+}
 
-    if (lex->flag == SUCCESS_DONE) {
-        close_lexer(lex);
-        printf("Terminated with success.\n");
-        return;
+void error_final(void) {
+    if (error_m.error_v->back == 0) {
+        printf("\nFinished successfully, bye-bye!\n");
+        exit(EXIT_SUCCESS);
     }
     
-    if (lex->flag == INVALID_STRING_LITERAL) {
-        fprintf(stderr, "%s:%d::%d:Syntax Error: Invalid string literal\n", 
-                lex->src_path, lex->line+1, lex->column+1);
-        close_lexer(lex);
-        exit(EXIT_FAILURE);
+    vector_t* error_v = error_m.error_v;
+    for (size_t i = 0; i < error_v->back; i++) {
+        error_t* packet = at(error_v, i);
+        printf("In file:%s, %lu::%lu ERROR: %s\n", 
+               packet->file_path, packet->line, packet->col, packet->message);
     }
+
+    free_vector(error_v);
+    exit(EXIT_FAILURE);
 }

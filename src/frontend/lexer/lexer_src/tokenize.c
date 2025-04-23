@@ -1,7 +1,10 @@
 #include <string.h>
 #include <ctype.h>
 
+#include "error.h"
 #include "lexer.h"
+
+#include <stdio.h>
 
 void tokenize(lexer* lex) {
     char* operators[] = {
@@ -37,6 +40,7 @@ void tokenize(lexer* lex) {
             lex->current++;
             lex->column = 0;
             lex->line++;
+            continue;
         }
 
         // Caught comment, skip.
@@ -112,8 +116,13 @@ void tokenize(lexer* lex) {
                 lex->current++;
                 // string literal not terminated.
                 if ((lex->current == lex->length) || newline) {
-                    lex->flag = INVALID_STRING_LITERAL;
-                    return;
+                    error_t descriptor = {
+                        .line = lex->line, 
+                        .col = lex->column,
+                        .message = "Invalid string literal!",
+                        .file_path = lex->src_path,
+                    };
+                    error_submit(descriptor, true);
                 }
                 lex->column++;
                                
@@ -127,8 +136,18 @@ void tokenize(lexer* lex) {
             add_token(lex, start, length, TOKEN_STRING_LITERAL);
             continue;
         }
+        
+        printf("%c\n", lex->src[lex->current]);
+        error_t descriptor = {
+            .line = lex->line, 
+            .col = lex->column,
+            .message = "Invalid symbol",
+            .file_path = lex->src_path,
+        };
+
+        error_submit(descriptor, true);
     } 
-    
+
     // terminate tokens with EOF token
     add_token(lex, 0, 0, TOKEN_EOF);
     lex->flag = SUCCESS_RUNNING;
