@@ -61,6 +61,8 @@ typedef struct {
     int dim_count;
 } parser;
 
+void report(token* token, char* path, char* message);
+
 void init_parser(parser* parser, lexer* lex);
 void parse(parser* parser);
 

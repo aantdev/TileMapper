@@ -4,11 +4,33 @@
 #include <string.h>
 
 #include "error.h"
+#include "lexer.h"
 #include "parser.h"
 
 //TODO: SYNTAX CHECK (done for SET)
 //TODO: PROCESS TILE
 //TODO: PROCESS PUT
+
+void report(token* token, char* path, char* message) {
+    error_t descriptor = {
+        .line = token->line, 
+        .col = token->column,
+        .message = message,
+        .file_path = path,
+    };
+    error_submit(descriptor, false);
+}
+
+void recover(parser* p) {
+    token* current = at(p->token_v, p->token_current);
+    while ( current->type != TOKEN_OPERATOR && current->type != TOKEN_EOF) {
+        p->token_current++;
+        current = at(p->token_v, p->token_current);
+    }    
+
+    p->rstate = OPERATOR;
+}
+
 void parse(parser *parser) {
     const int operator_count = 3;
     const char* operators[] = {
@@ -17,9 +39,8 @@ void parse(parser *parser) {
         "tile"
     };
     
-
-    while ( ((token*)at(parser->token_v, parser->token_current))->type != TOKEN_EOF) {
-        token* token_current = at(parser->token_v, parser->token_current); 
+    token* token_current = at(parser->token_v, parser->token_current); 
+    while ( token_current->type != TOKEN_EOF) {
 
         // first step, expecting valid operator
         if (parser->rstate == OPERATOR) {
@@ -33,16 +54,6 @@ void parse(parser *parser) {
                 }
             }
 
-            if (i == 3) {
-                error_t descriptor = {
-                    .line = token_current->line, 
-                    .col = token_current->column,
-                    .message = "Expected a valid operator",
-                    .file_path = parser->file_path,
-                };
-                error_submit(descriptor, false);
-            }
-            
             parser->rstate = IDENTIFIER;
             parser->token_current++;
 
@@ -62,9 +73,12 @@ void parse(parser *parser) {
                 // process_tile(parser);
                 break;
             case NONE:
-                exit(EXIT_FAILURE);
+                report(token_current, parser->file_path, "Expected valid operator");
+                recover(parser);
+                break;
         }
 
 
+        token_current = at(parser->token_v, parser->token_current); 
     }
 }

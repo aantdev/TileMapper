@@ -6,7 +6,7 @@
 
 
 void add_token(lexer *lex, int start, int length, t_type type) {
-    token new_token = {type, NULL, lex->line, lex->column};
+    token new_token = {type, "eof", lex->line, lex->column};
 
     if (type != TOKEN_EOF) {
         // allocate some memory for the string and memcpy
